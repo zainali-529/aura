@@ -1,0 +1,12 @@
+export { HeroSection } from "./hero-section";
+export { ServicesSection } from "./services-section";
+export { ServicesCarouselSection } from "./services-carousel-section";
+export { LogoCloudSection } from "./logo-cloud-section";
+export { AboutSection } from "./about-section";
+export { HowItWorksSection } from "./how-it-works-section";
+export { IndustriesSection } from "./industries-section";
+export { EngagementModelsSection } from "./engagement-models-section";
+export { TeamSection } from "./team-section";
+export { TestimonialsSection } from "./testimonials-section";
+export { CtaSection } from "./cta-section";
+export * from "./logo-cloud-logos";
