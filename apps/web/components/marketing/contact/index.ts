@@ -1,2 +1,2 @@
-// Marketing Contact components (Inquiry forms, consultation booking, office addresses)
-export {};
+export { ContactFormSection } from "./contact-form-section";
+export { ContactHubsSection } from "./contact-hubs-section";

@@ -11,6 +11,7 @@ import {
 	ArrowRight01Icon,
 } from "@hugeicons/core-free-icons";
 import { cn } from "@workspace/ui/lib/utils";
+import { BPO_SERVICES_CATALOG } from "@/components/marketing/services/services-data";
 
 // ── Carousel Service Data Interface ────────────────────────────────
 export interface CarouselService {
@@ -22,79 +23,17 @@ export interface CarouselService {
 	link: string;
 }
 
-// ── Services Data (Enterprise BPO & Intelligent Operations) ────────
-export const BPO_CAROUSEL_SERVICES: CarouselService[] = [
-	{
-		number: "01",
-		title: "Customer Experience",
-		tag: "24/7 Omnichannel Care • Voice, Chat & Email",
-		description:
-			"Tier 1–3 multilingual care specialists delivering personalized, empathetic interactions and consistent 98.4% CSAT across every touchpoint.",
-		image:
-			"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80",
-		link: "/contact",
-	},
-	{
-		number: "02",
-		title: "Lead Generation",
-		tag: "Pipeline Acceleration • Dedicated SDR Pods",
-		description:
-			"High-impact outbound prospecting, qualified sales appointment booking, and multi-channel account mapping that scale executive revenue pipelines.",
-		image:
-			"https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80",
-		link: "/contact",
-	},
-	{
-		number: "03",
-		title: "Technical Support",
-		tag: "ITIL Certified • Strict 45s SLA",
-		description:
-			"Certified tier-1 to tier-3 technical engineers resolving complex SaaS, cloud infrastructure, API diagnostics, and developer incident triage.",
-		image:
-			"https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=900&q=80",
-		link: "/contact",
-	},
-	{
-		number: "04",
-		title: "Back-Office Operations",
-		tag: "High Throughput • 99.9% Data Accuracy",
-		description:
-			"Scalable document verification, catalog governance, transaction auditing, and rapid structured data extraction at massive enterprise volumes.",
-		image:
-			"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
-		link: "/contact",
-	},
-	{
-		number: "05",
-		title: "Finance & Specialized Operations",
-		tag: "FinOps & Billing • PCI-DSS Compliance",
-		description:
-			"Accounts receivable reconciliation, invoice auditing, chargeback dispute arbitration, and claims management under rigorous enterprise compliance.",
-		image:
-			"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=80",
-		link: "/contact",
-	},
-	{
-		number: "06",
-		title: "HR & Business Support",
-		tag: "Talent Ops • Executive Concierge & Payroll",
-		description:
-			"End-to-end recruitment screening, global talent onboarding coordination, payroll administration, and dedicated executive administrative support.",
-		image:
-			"https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=900&q=80",
-		link: "/contact",
-	},
-	{
-		number: "07",
-		title: "Digital & Creative Services",
-		tag: "Brand Production • UI/UX & Content Ops",
-		description:
-			"High-velocity creative production, digital asset management, responsive UI/UX design, motion graphics, and multi-channel content localization.",
-		image:
-			"https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=900&q=80",
-		link: "/contact",
-	},
-];
+// ── Services Data (Derived from shared BPO Catalog) ────────────────
+export const BPO_CAROUSEL_SERVICES: CarouselService[] = BPO_SERVICES_CATALOG.map(
+	(service) => ({
+		number: service.number,
+		title: service.title,
+		tag: service.tag,
+		description: service.description,
+		image: service.image,
+		link: `/services/${service.id}`,
+	})
+);
 
 type CarouselApi = UseEmblaCarouselType[1];
 
@@ -188,7 +127,7 @@ export function ServicesCarouselSection({
 					{/* Right Side Pill Button (matches Antigravity 'View blog' pill) */}
 					<div className="hidden sm:block">
 						<Link
-							href="/contact"
+							href="/services"
 							className="inline-flex items-center justify-center rounded-full border border-border/80 bg-background px-5 py-2.5 text-xs sm:text-sm font-semibold text-foreground transition-all duration-200 hover:bg-muted hover:border-foreground/30 active:translate-y-px"
 						>
 							View all services
@@ -315,7 +254,7 @@ export function ServicesCarouselSection({
 				{/* Mobile-Only View All Services Link */}
 				<div className="sm:hidden pr-4">
 					<Link
-						href="/contact"
+						href="/services"
 						className="text-xs font-semibold text-foreground underline underline-offset-4"
 					>
 						View all
