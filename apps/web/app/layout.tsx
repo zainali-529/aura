@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Outfit, Geist_Mono } from "next/font/google";
 
 import "@workspace/ui/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SITE_FEATURES } from "@/lib/site-config";
 import { cn } from "@workspace/ui/lib/utils";
 
 // ── Typography Setup for Aura BPO ──────────────────────────────────
@@ -41,8 +42,10 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
+      style={SITE_FEATURES.enableDarkMode ? undefined : { colorScheme: "light" }}
       className={cn(
         "antialiased",
+        !SITE_FEATURES.enableDarkMode && "light",
         plusJakartaSans.variable,
         outfit.variable,
         fontMono.variable,

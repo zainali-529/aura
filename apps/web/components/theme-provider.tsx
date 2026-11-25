@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
+import { SITE_FEATURES } from "@/lib/site-config"
 
 function ThemeProvider({
   children,
@@ -10,12 +11,13 @@ function ThemeProvider({
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
+      defaultTheme={SITE_FEATURES.enableDarkMode ? "system" : "light"}
+      forcedTheme={SITE_FEATURES.enableDarkMode ? undefined : "light"}
+      enableSystem={SITE_FEATURES.enableDarkMode}
       disableTransitionOnChange
       {...props}
     >
-      <ThemeHotkey />
+      {SITE_FEATURES.enableDarkMode ? <ThemeHotkey /> : null}
       {children}
     </NextThemesProvider>
   )

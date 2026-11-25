@@ -13,6 +13,7 @@ import {
   Sun01Icon,
 } from "@hugeicons/core-free-icons";
 import { usePathname, useRouter } from "next/navigation";
+import { SITE_FEATURES } from "@/lib/site-config";
 import { FloatingDock, FloatingDockItem } from "@/components/ui/floating-dock";
 
 interface SiteDockProps {
@@ -43,7 +44,7 @@ export function SiteDock({ onContactClick }: SiteDockProps) {
     router.push(href);
   };
 
-  const isDark = mounted && resolvedTheme === "dark";
+  const isDark = SITE_FEATURES.enableDarkMode && mounted && resolvedTheme === "dark";
 
   const isHome = pathname === "/";
   const isAbout = pathname === "/about" || pathname.startsWith("/about/");
@@ -123,25 +124,29 @@ export function SiteDock({ onContactClick }: SiteDockProps) {
       },
       active: isContact,
     },
-    {
-      title: isDark ? "Light Mode" : "Dark Mode",
-      icon: isDark ? (
-        <HugeiconsIcon
-          icon={Sun01Icon}
-          className="h-full w-full text-amber-400 dark:text-amber-300"
-          strokeWidth={1.8}
-        />
-      ) : (
-        <HugeiconsIcon
-          icon={Moon02Icon}
-          className="h-full w-full text-current"
-          strokeWidth={1.8}
-        />
-      ),
-      href: "#theme",
-      onClick: () => setTheme(isDark ? "light" : "dark"),
-      active: false,
-    },
+    ...(SITE_FEATURES.enableDarkMode
+      ? [
+          {
+            title: isDark ? "Light Mode" : "Dark Mode",
+            icon: isDark ? (
+              <HugeiconsIcon
+                icon={Sun01Icon}
+                className="h-full w-full text-amber-400 dark:text-amber-300"
+                strokeWidth={1.8}
+              />
+            ) : (
+              <HugeiconsIcon
+                icon={Moon02Icon}
+                className="h-full w-full text-current"
+                strokeWidth={1.8}
+              />
+            ),
+            href: "#theme",
+            onClick: () => setTheme(isDark ? "light" : "dark"),
+            active: false,
+          },
+        ]
+      : []),
   ];
 
   return (

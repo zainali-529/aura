@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
+import { SITE_FEATURES } from "@/lib/site-config";
 
 export interface HalftonePatternHeroProps {
   /** Base height of the canvas container. */
@@ -183,7 +184,7 @@ export function HalftonePatternHero({
     setMounted(true);
   }, []);
 
-  const isDark = mounted && resolvedTheme === "dark";
+  const isDark = SITE_FEATURES.enableDarkMode && mounted && resolvedTheme === "dark";
 
   // Light mode: Deep forest pine (#112B1B) with Electric Parrot (#C7E96B) hover
   // Dark mode: Soft sage (#C4D6C8) with Electric Parrot (#C7E96B) hover

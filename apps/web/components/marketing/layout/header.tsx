@@ -29,6 +29,7 @@ import {
 	SheetDescription,
 } from "@workspace/ui/components/sheet";
 import { cn } from "@workspace/ui/lib/utils";
+import { SITE_FEATURES } from "@/lib/site-config";
 import {
 	HEADER_SERVICES_ITEMS,
 	HEADER_ENGAGEMENT_MODELS,
@@ -192,7 +193,7 @@ export function MarketingHeader() {
 		setOpenMenu(null);
 	};
 
-	const isDark = mounted && resolvedTheme === "dark";
+	const isDark = SITE_FEATURES.enableDarkMode && mounted && resolvedTheme === "dark";
 
 	const isSolutionsActive =
 		pathname.startsWith("/industries") ||
@@ -360,29 +361,31 @@ export function MarketingHeader() {
 					</Link>
 				</nav>
 
-				{/* ── Right: Theme Toggle, Primary Contact Us CTA & Operations Sheet ── */}
+				{/* ── Right: Theme Toggle (when enabled), Primary Contact Us CTA & Operations Sheet ── */}
 				<div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-					{/* Theme Mode Switch */}
-					<button
-						type="button"
-						onClick={() => setTheme(isDark ? "light" : "dark")}
-						aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-						className="inline-flex size-9 sm:size-10 items-center justify-center rounded-lg bg-muted/80 text-foreground transition-colors hover:bg-muted active:translate-y-px cursor-pointer"
-					>
-						{isDark ? (
-							<HugeiconsIcon
-								icon={Sun01Icon}
-								strokeWidth={2}
-								className="size-4.5 text-primary"
-							/>
-						) : (
-							<HugeiconsIcon
-								icon={Moon02Icon}
-								strokeWidth={2}
-								className="size-4.5"
-							/>
-						)}
-					</button>
+					{/* Theme Mode Switch — controlled via SITE_FEATURES.enableDarkMode */}
+					{SITE_FEATURES.enableDarkMode && (
+						<button
+							type="button"
+							onClick={() => setTheme(isDark ? "light" : "dark")}
+							aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+							className="inline-flex size-9 sm:size-10 items-center justify-center rounded-lg bg-muted/80 text-foreground transition-colors hover:bg-muted active:translate-y-px cursor-pointer"
+						>
+							{isDark ? (
+								<HugeiconsIcon
+									icon={Sun01Icon}
+									strokeWidth={2}
+									className="size-4.5 text-primary"
+								/>
+							) : (
+								<HugeiconsIcon
+									icon={Moon02Icon}
+									strokeWidth={2}
+									className="size-4.5"
+								/>
+							)}
+						</button>
+					)}
 
 					{/* Primary Contact Us CTA */}
 					<Link
